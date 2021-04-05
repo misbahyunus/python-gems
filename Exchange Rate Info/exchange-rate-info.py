@@ -46,7 +46,7 @@ def get_url(api_url_base, api_access_key):
     # Fixer.io base currency
     api_base_currency = 'AUD'
 
-    return (api_url_base.format(api_access_key, api_format, api_base_currency))
+    return (api_url_base.format(api_access_key, api_format))
 
 def get_response(address, header):
     """
@@ -83,9 +83,15 @@ def display_rates(exchange_rates):
     """
     Displays the currency rates.    
     """
+    base_AUD_rate = 1
+
+    for k,v in exchange_rates['rates'].items():
+        if k == 'AUD':
+            base_AUD_rate = v
+
     for k,v in exchange_rates['rates'].items():
         currency_code = k
-        currency_rate = v
+        currency_rate = round(v / base_AUD_rate, 2)
         print ('[{0:%d/%m/%Y %I:%M:%S %p}] 1 AUD = {1} {2}'.format(datetime.datetime.now(), currency_rate, currency_code))   
 
 # Standard boilerplate to call the main() function to begin
