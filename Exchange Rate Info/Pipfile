@@ -8,6 +8,7 @@ pylint = "*"
 
 [packages]
 requests = "*"
+certifi = "==2026.10.23"
 
 [requires]
 python_version = "3.7"
